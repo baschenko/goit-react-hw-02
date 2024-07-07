@@ -6,9 +6,10 @@ import Feedback from './Feedback/Feedback';
 import Notification from './Notification/Notification';
 
 const App = () => {
+  // Створюємо State і загружаємо з LocalStorage об'єкт, якщо є
   const [values, setValues] = useState(() => {
     const saveValues = JSON.parse(window.localStorage.getItem('values'));
-    if (saveValues !== null) {
+    if (saveValues) {
       return saveValues;
     }
     return {
@@ -18,6 +19,7 @@ const App = () => {
     };
   });
 
+  // Додаємо у LocalStorage
   useEffect(() => {
     window.localStorage.setItem('values', JSON.stringify(values));
   }, [values]);
@@ -26,9 +28,10 @@ const App = () => {
 
   const positiveFeedback = Math.round((values.good / totalFeedback) * 100);
 
+  // Оновлюємо у State по події
   const updateFeedback = options => {
     if (options !== 'reset') {
-      setValues({ ...values, [options]: values[options] + 1 });
+      setValues(prev => ({ ...prev, [options]: prev[options] + 1 }));
     } else {
       setValues({
         good: 0,
