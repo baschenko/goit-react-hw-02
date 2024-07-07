@@ -7,7 +7,6 @@ const Options = ({ values, onLeaveFeedback, totalFeedback }) => {
     nameButtons.push('reset');
   }
 
-  console.log(nameButtons);
   const buttons = nameButtons.map(nameButton => {
     return (
       <button

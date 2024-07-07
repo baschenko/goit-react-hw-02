@@ -1,16 +1,26 @@
 import Description from './Description/Description';
 import s from './App.module.css';
 import Options from './Options/Options';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Feedback from './Feedback/Feedback';
 import Notification from './Notification/Notification';
 
 const App = () => {
-  const [values, setValues] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const [values, setValues] = useState(() => {
+    const saveValues = JSON.parse(window.localStorage.getItem('values'));
+    if (saveValues !== null) {
+      return saveValues;
+    }
+    return {
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    };
   });
+
+  useEffect(() => {
+    window.localStorage.setItem('values', JSON.stringify(values));
+  }, [values]);
 
   const totalFeedback = values.good + values.neutral + values.bad;
 
