@@ -10,20 +10,21 @@ const Options = ({ values, onLeaveFeedback, totalFeedback }) => {
   }
 
   // Обгортаємо список масиву кнопок в розмітку
-  const buttons = nameButtons.map(nameButton => {
-    return (
-      <button
-        key={nameButton}
-        type="button"
-        onClick={() => onLeaveFeedback(nameButton)}
-        className={s.btn}
-      >
-        {nameButton}
-      </button>
-    );
-  });
 
-  return <div className={s.section}>{buttons}</div>;
+  return (
+    <div className={s.section}>
+      {nameButtons.map(nameButton => (
+        <button
+          key={nameButton}
+          type="button"
+          onClick={() => onLeaveFeedback(nameButton)}
+          className={s.btn}
+        >
+          {nameButton}
+        </button>
+      ))}
+    </div>
+  );
 };
 
 export default Options;

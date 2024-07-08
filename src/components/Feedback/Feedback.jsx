@@ -5,16 +5,15 @@ const Feedback = ({ values, totalFeedback, positiveFeedback }) => {
   const feedbacks = Object.keys(values);
 
   // Обгортаємо список масиву подій в розмітку
-  const feedbackList = feedbacks.map(feedback => {
-    return (
-      <li key={feedback}>
-        {feedback}: {values[feedback]}
-      </li>
-    );
-  });
   return (
     <div>
-      <ul className={s.list}>{feedbackList}</ul>
+      <ul className={s.list}>
+        {feedbacks.map(feedback => (
+          <li key={feedback}>
+            {feedback}: {values[feedback]}
+          </li>
+        ))}
+      </ul>
       <p>Total: {totalFeedback}</p>
       <p>Positive: {positiveFeedback}%</p>
     </div>
